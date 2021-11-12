@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Page Title</title>
+        <!-- <link rel="stylesheet" href="css.css"> -->
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <style>
+            *{
+                padding:0;
+                margin:0;
+            }
+            .total{
+                display:flex;
+                justify-content: center;
+                align-items: center;
+                flex-direction: column;
+                height: 100vh;
+                background:linear-gradient(to bottom , #E1A2B8,#9F2BC1); 
+            }
+            #container{
+                display:flex;
+                justify-content: stretch;
+                flex-direction: column;
+                background-color: aqua;
+                height: 300px;
+                width: 400px;
+                margin:0 auto;
+            }
+            #res{
+                overflow:auto;
+                background-color: aqua;
+                height: 150px;
+                text-align: right;
+                font-size: 75px;
+            }
+            #btns{
+                display:flex;
+                justify-content: center;
+                align-items: center;
+                flex-wrap: wrap;
+                outline: none;
+                border: none;
+            }
+            .btn:hover{
+                background: #2c266b;
+                color:white;
+                cursor: pointer;
+            }
+            .btn{
+                font-size: 75px;
+                width:100px;
+                border: none;
+            }
+            #btnClr{
+                background-color:red;
+                color:white;
+                outline: none;
+                border: none;
+            }
+            #btnEql{
+                background-color:green;
+                color:white;
+            }
+            @media only screen and (max-width: 500px) {
+                #container{
+                    height: 120px;
+                    width: 200px;
+                }
+                #res{
+                    height: 70px;
+                    text-align: right;
+                    font-size: 30px;
+                }
+                .btn{
+                    font-size: 30px;
+                    width:50px;
+                    border: none;
+                }
+            }
+        </style>
+    </head>
+    <body>
+        <div class="total">
+            <div id="container">
+                <div id="res"></div>
+                <div id="btns">
+                    <button id="btn0" class="btn" onclick="disp('0')">0</button>
+                    <button id="btn1" class="btn" onclick="disp('1')">1</button>
+                    <button id="btnClr" class="btn" >C</button>
+                    <button id="btnEql" class="btn" >=</button>
+                    <button id="btnSum" class="btn" onclick="disp('+')">+</button>
+                    <button id="btnSub" class="btn" onclick="disp('-')">-</button>
+                    <button id="btnMul" class="btn" onclick="disp('*')">*</button>
+                    <button id="btnDiv" class="btn" onclick="disp('/')">/</button>
+                </div>
+        </div>
+            <script>
+                const res = document.getElementById('res');
+                const clear = document.getElementById('btnClr');
+                const evaluate = document.getElementById('btnEql');
+
+                function disp(value){
+                    res.innerHTML+=value;
+                }
+
+                clear.addEventListener('click',() => {
+                    res.innerHTML = "";
+                })
+                
+                evaluate.addEventListener('click',() =>{
+                    var expr = res.innerHTML;
+                    var nums = /(\d+)/g;
+                    expr = expr.replace(nums, function(match) {
+                        return parseInt(match, 2);
+                    })
+                    res.innerHTML = Math.floor(eval(expr)).toString(2);
+                })
+          </script>
+    </body>
+</html>
